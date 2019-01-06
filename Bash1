@@ -1,0 +1,70 @@
+question = " $ (echo -e" Dodaj - [a] lub Wyciąg - [x] ") "
+prep_archive ( ) {
+    echo -e "Nazwij archiwum 7z:"
+    przeczytaj new_archive
+}
+prep_files ( ) {
+    echo -e " \ n Wpisz pliki do dodania do archiwum"
+    przeczytaj add_files
+}
+ 
+clean ( ) {
+    \ clear
+    \ ls
+    echo "
+    echo "
+}
+extr ( ) {
+    echo -e "Wybierz archiwum do wyodrębnienia"
+    przeczytaj plik extract_file
+}
+echo $ question
+przeczytaj odpowiedź
+ 
+jeśli [ [ $ answer = a ] ] ; następnie
+    czysty
+    prep_archive
+    prep_files
+        7z " $ new_archive " .7z. / $ add_files
+fi
+jeśli [ [ $ odpowiedź == x ] ] ; następnie
+    czysty
+    extr
+    7z x. / " $ extract_file "
+fi
+
+Dane wklej RAW
+question="$(echo -e "Add - [a] or Extract - [x]")"
+prep_archive () {
+	echo -e "Name the 7z archive: "
+	read new_archive
+}
+prep_files () {
+	echo -e "\nType files to add to archive"
+	read add_files
+}
+
+clean () {
+	\clear
+	\ls
+	echo ''
+	echo ''
+}
+extr () {
+	echo -e "Choose archive to extract"
+	read extract_file
+}
+echo $question
+read answer
+
+if [[ $answer = a ]]; then
+	clean
+	prep_archive
+	prep_files
+        7z a "$new_archive".7z ./$add_files
+fi
+if [[ $answer == x ]]; then
+	clean
+	extr
+	7z x ./"$extract_file"
+fi
